@@ -12,24 +12,29 @@ public class SocketClient {
     public static void main(String[] args) {
 
         try {
-            Socket client = new Socket("192.168.150.11",9090);
+            Socket client = new Socket("192.168.2.103", 9090);
 
-            client.setSendBufferSize(20);
-            client.setTcpNoDelay(true);
+            //client.setSendBufferSize(20);
+            //client.setTcpNoDelay(true);
             OutputStream out = client.getOutputStream();
 
             InputStream in = System.in;
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-            while(true){
+            while (true) {
                 String line = reader.readLine();
-                if(line != null ){
-                    byte[] bb = line.getBytes();
-                    for (byte b : bb) {
-                        out.write(b);
+                if (line != null && !line.isEmpty()) {
+                    if ("-1".contains(line)) {
+                        in.close();
+                        out.close();
+                        client.close();
+                        break;
                     }
+                    byte[] bb = line.getBytes();
+                    out.write(bb);
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
