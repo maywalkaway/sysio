@@ -24,7 +24,7 @@ public class SocketClient {
             while (true) {
                 String line = reader.readLine();
                 if (line != null && !line.isEmpty()) {
-                    if ("-1".contains(line)) {
+                    if ("q".contains(line)) {
                         in.close();
                         out.close();
                         client.close();
