@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
  */
 public class Server {
 
-    private boolean isStop;
     private ServerSocket server;
     private ExecutorService pool;
 
@@ -23,7 +22,7 @@ public class Server {
 
     public void start() throws IOException {
         System.out.println("服务器已启动...");
-        while (!isStop) {
+        while (true) {
             Socket client = server.accept();
             System.out.println("接受到客户端连接：" + client.getInetAddress().getHostAddress() + ":" + client.getPort());
 

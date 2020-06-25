@@ -19,7 +19,6 @@ public class NioClient {
         InputStream in = System.in;
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-        ByteBuffer buf = ByteBuffer.allocate(1024);
         while (true) {
             String line = reader.readLine();
             if (line != null && !line.isEmpty()) {
@@ -29,9 +28,8 @@ public class NioClient {
                     client.close();
                     break;
                 }
-                buf.put(line.getBytes());
-                client.write(buf);
-                buf.clear();
+                ByteBuffer buffer = ByteBuffer.wrap(line.getBytes());
+                client.write(buffer);
             }
         }
     }
