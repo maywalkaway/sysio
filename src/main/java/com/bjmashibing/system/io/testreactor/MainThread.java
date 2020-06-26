@@ -11,10 +11,10 @@ public class MainThread {
         //这里不做关于IO 和  业务的事情
 
         //1,创建 IO Thread  （一个或者多个）
-        SelectorThreadGroup boss = new SelectorThreadGroup(3);  //混杂模式
+        SelectorThreadGroup boss = new SelectorThreadGroup(1,"boss");  //混杂模式
         //boss有自己的线程组
 
-        SelectorThreadGroup worker = new SelectorThreadGroup(3);  //混杂模式
+        SelectorThreadGroup worker = new SelectorThreadGroup(3,"worker");  //混杂模式
         //worker有自己的线程组
 
         //混杂模式，只有一个线程负责accept，每个都会被分配client，进行R/W
@@ -29,10 +29,10 @@ public class MainThread {
          * 因为未来 listen 一旦accept得到client后得去worker中 next出一个线程分配
          */
 
-        boss.bind(9999);
-        boss.bind(8888);
-        boss.bind(6666);
-        boss.bind(7777);
+        boss.bind(9090);
+//        boss.bind(8888);
+//        boss.bind(6666);
+//        boss.bind(7777);
 
     }
 }
